@@ -4,24 +4,13 @@
 @Created 	:	2024/04/07  14:51
 @Updated	:	2024/04/07  14:51
 @Author 	:	goonhope@gmail.com; Teddy; Zhuhai
-@Function	:	功能
+@Function	:	Master-Mind-007/Auto-Parse-Proxy https stocks5 前100测试
 @Process 	:	Flow
 @WitNote	:	备注
 @Reference	:	引用
 """
 from faker import Faker
 import requests, threading, os, time, platform
-from concurrent.futures import ThreadPoolExecutor as TPool
-
-
-def multi(func):
-    """并发执行函数"""
-    def inner(*arg, **kwarg):
-        n = os.cpu_count()
-        with TPool(n) as ex:
-            go = ex.submit(func, *arg, **kwarg)
-        return go.result()
-    return inner
 
 
 def google_hder(host=None, o=True):
@@ -62,7 +51,6 @@ def err(func):
 def process(i, type):
     ip, port = i.split(":")
     requests.get("https://icanhazip.com/", proxies={type: f"{type}://{i}"}, timeout=3)
-    time.sleep(0.314)
     if info := get_(f"http://ip-api.com/json/{ip}", j=True):
         info.update(dict(port=i,type=type))
         with open("all.txt", "a+") as f:
@@ -73,13 +61,14 @@ def go():
     hold = "https stock5".split()
     for ty in hold:
         if data := get_(ky=ty):
-            for i in data:
-                while threading.active_count() > 7000:
-                    time.sleep(3)
-                threading.Thread(target=process, args=(i,ty)).start()
-            while threading.active_count() > 1:
-                time.sleep(1)
-
+            process(i, type)
+            # for i in data:
+            #     while threading.active_count() > 7000:
+            #         time.sleep(3)
+            #     threading.Thread(target=process, args=(i,ty)).start()
+            # while threading.active_count() > 1:
+            #     time.sleep(1)
+        time.sleep(1.314)
 
 if __name__ == '__main__':
     go()
