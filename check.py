@@ -62,14 +62,15 @@ def go():
     hold = "https stock5".split()
     for ty in hold:
         if data := get_(ky=ty):
-            process(i, type)
-            # for i in data:
+            for i in data:
+                process(i, type)
+                time.sleep(1.314)
             #     while threading.active_count() > 7000:
             #         time.sleep(3)
             #     threading.Thread(target=process, args=(i,ty)).start()
             # while threading.active_count() > 1:
             #     time.sleep(1)
-        time.sleep(1.314)
+        
 
 if __name__ == '__main__':
     go()
