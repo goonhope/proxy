@@ -3,7 +3,7 @@
 @Filename	:	check.py
 @Created 	:	2024/04/07  14:51
 @Updated	:	2024/04/07  14:51
-@Author 		:	goonhope@gmail.com; Teddy; Zhuhai
+@Author 	:	goonhope@gmail.com; Teddy; Zhuhai
 @Function	:	功能
 @Process 	:	Flow
 @WitNote	:	备注
@@ -38,7 +38,7 @@ def google_hder(host=None, o=True):
     return google_hders
 
 
-def get_(url="", hdrs=None, data=None, proxy=None, j=True,ky=""):
+def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     """get optional json"""
     furl = f"https://raw.githubusercontent.com/Master-Mind-007/Auto-Parse-Proxy/main/{ky}.txt" if ky else url
     url_headers, goal = google_hder(furl.split("/")[2]), None
@@ -71,7 +71,7 @@ def process(i, type):
 def go():
     hold = "https stock5".split()
     for ty in hold:
-        if data := get_(ty):
+        if data := get_(ky=ty):
             for i in data:
                 while threading.active_count() > 7000:
                     time.sleep(3)
