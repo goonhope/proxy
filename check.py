@@ -68,11 +68,9 @@ def go():
             for i in data:
                 if info :=process(i, ty):
                     jtext[ty].append(info)
-            #     while threading.active_count() > 7000:
-            #         time.sleep(3)
+            #     while threading.active_count() > 7000: time.sleep(3)
             #     threading.Thread(target=process, args=(i,ty)).start()
-            # while threading.active_count() > 1:
-            #     time.sleep(1)
+            # while threading.active_count() > 1: time.sleep(1)
     with open("all.txt", "w") as f: f.write(json.dumps(jtext))
 
 
