@@ -3,7 +3,7 @@
 @Filename	:	check.py
 @Created 	:	2024/04/07  14:51
 @Updated	:	2024/04/07  14:51
-@Author 		:	goonhope@gmail.com; Teddy; Zhuhai
+@Author 	:	goonhope@gmail.com; Teddy; Zhuhai
 @Function	:	Master-Mind-007/Auto-Parse-Proxy https stocks5 前100测试
 @Process 	:	直接获取ip文本, 代理验证
 @WitNote	:	备注
