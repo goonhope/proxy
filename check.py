@@ -54,6 +54,7 @@ def process(i, ty):
     ip, port = i.split(":")
     # requests.get("https://icanhazip.com/", proxies={ty: f"{ty}://{i}"}, timeout=3)
     if info := get_(f"http://ip-api.com/json/{ip}fields=status,country", j=True,proxy={ty: f"{ty}://{i}"}):
+        time.sleep(1.912)
         if info.get("status") == "success":
             info.update(dict(port=i,type=ty,country=info.get("country")))
             return info
