@@ -62,7 +62,7 @@ def process(i, ty):
 def go():
     """执行"""
     types = "https stock4 stock5".split()
-    hold = dict.fromkeys(hold,[])
+    hold = dict.fromkeys(types,[])
     for ty in types:
         if data := get_(ky=ty):
             for i in data:
