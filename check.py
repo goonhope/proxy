@@ -64,7 +64,7 @@ def go():
         if data := get_(ky=ty):
             for i in data:
                 process(i, type)
-                time.sleep(1.314)
+                time.sleep(0.5314)
             #     while threading.active_count() > 7000:
             #         time.sleep(3)
             #     threading.Thread(target=process, args=(i,ty)).start()
