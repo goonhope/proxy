@@ -50,6 +50,7 @@ def err(func):
 
 @err
 def process(i, ty):
+    """验证过滤"""
     ip, port = i.split(":")
     requests.get("https://icanhazip.com/", proxies={ty: f"{ty}://{i}"}, timeout=3)
     if info := get_(f"http://ip-api.com/json/{ip}", j=True):
@@ -59,7 +60,8 @@ def process(i, ty):
 
 
 def go():
-    hold = "https stock5".split()
+    """执行"""
+    hold = "https stock4 stock5".split()
     jtext = dict.fromkeys(hold,[])
     for ty in hold:
         if data := get_(ky=ty):
@@ -71,8 +73,7 @@ def go():
             #     threading.Thread(target=process, args=(i,ty)).start()
             # while threading.active_count() > 1:
             #     time.sleep(1)
-    with open("all.txt", "w") as f:
-        f.write(json.dumps(jtext))
+    with open("all.txt", "w") as f: f.write(json.dumps(jtext))
 
 
 if __name__ == '__main__':
