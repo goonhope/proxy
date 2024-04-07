@@ -11,6 +11,7 @@
 """
 from faker import Faker
 import requests, threading, os, time, platform
+from urllib3 import disable_warnings as dw; dw()
 
 
 def google_hder(host=None, o=True):
