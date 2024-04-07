@@ -44,7 +44,7 @@ def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     url_headers, goal = google_hder(furl.split("/")[2]), None
     if hdrs and isinstance(data, dict): url_headers.update(hdrs)
     url_data = requests.get(furl, headers=url_headers, params=data, timeout=5, proxies=proxy, verify=False)
-    if url_data.status_code == 200: goal = url_data.json() if j else set(url_data.text.strip().split())
+    if url_data.status_code == 200: goal = url_data.json() if j else set(url_data.text.strip().split()[:100])
     return goal
 
 
