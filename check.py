@@ -3,7 +3,7 @@
 @Filename	:	check.py
 @Created 	:	2024/04/07  14:51
 @Updated	:	2024/04/07  14:51
-@Author 		:	goonhope@gmail.com; Teddy; Zhuhai
+@Author 	:	goonhope@gmail.com; Teddy; Zhuhai
 @Function	:	功能
 @Process 	:	Flow
 @WitNote	:	备注
