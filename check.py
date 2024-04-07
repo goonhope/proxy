@@ -3,15 +3,25 @@
 @Filename	:	check.py
 @Created 	:	2024/04/07  14:51
 @Updated	:	2024/04/07  14:51
-@Author 	:	goonhope@gmail.com; Teddy; Zhuhai
-@Function	:	Master-Mind-007/Auto-Parse-Proxy https stocks5 前100测试
+@Author 		:	goonhope@gmail.com; Teddy; Zhuhai
+@Function	:	功能
 @Process 	:	Flow
 @WitNote	:	备注
 @Reference	:	引用
 """
 from faker import Faker
 import requests, threading, os, time, platform
-from urllib3 import disable_warnings as dw; dw()
+from concurrent.futures import ThreadPoolExecutor as TPool
+
+
+def multi(func):
+    """并发执行函数"""
+    def inner(*arg, **kwarg):
+        n = os.cpu_count()
+        with TPool(n) as ex:
+            go = ex.submit(func, *arg, **kwarg)
+        return go.result()
+    return inner
 
 
 def google_hder(host=None, o=True):
@@ -28,13 +38,13 @@ def google_hder(host=None, o=True):
     return google_hders
 
 
-def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
+def get_(url="", hdrs=None, data=None, proxy=None, j=True,ky=""):
     """get optional json"""
     furl = f"https://raw.githubusercontent.com/Master-Mind-007/Auto-Parse-Proxy/main/{ky}.txt" if ky else url
     url_headers, goal = google_hder(furl.split("/")[2]), None
     if hdrs and isinstance(data, dict): url_headers.update(hdrs)
     url_data = requests.get(furl, headers=url_headers, params=data, timeout=5, proxies=proxy, verify=False)
-    if url_data.status_code == 200: goal = url_data.json() if j else set(url_data.text.strip().split()[:100])
+    if url_data.status_code == 200: goal = url_data.json() if j else url_data.text.strip().split()
     return goal
 
 
@@ -55,22 +65,20 @@ def process(i, type):
     if info := get_(f"http://ip-api.com/json/{ip}", j=True):
         info.update(dict(port=i,type=type))
         with open("all.txt", "a+") as f:
-            f.write(str(info) + "\n")
+            f.write(i + "\n")
 
 
 def go():
     hold = "https stock5".split()
     for ty in hold:
-        if data := get_(ky=ty):
+        if data := get_(ty):
             for i in data:
-                process(i, type)
-                time.sleep(0.5314)
-            #     while threading.active_count() > 7000:
-            #         time.sleep(3)
-            #     threading.Thread(target=process, args=(i,ty)).start()
-            # while threading.active_count() > 1:
-            #     time.sleep(1)
-        
+                while threading.active_count() > 7000:
+                    time.sleep(3)
+                threading.Thread(target=process, args=(i,ty)).start()
+            while threading.active_count() > 1:
+                time.sleep(1)
+
 
 if __name__ == '__main__':
     go()
