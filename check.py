@@ -61,17 +61,19 @@ def process(i, ty):
 
 def go():
     """执行"""
-    hold = "https stock4 stock5".split()
-    jtext = dict.fromkeys(hold,[])
-    for ty in hold:
+    types = "https stock4 stock5".split()
+    hold = dict.fromkeys(hold,[])
+    for ty in types:
         if data := get_(ky=ty):
             for i in data:
                 if info :=process(i, ty):
-                    jtext[ty].append(info)
+                    hold[ty].append(info)
             #     while threading.active_count() > 7000: time.sleep(3)
             #     threading.Thread(target=process, args=(i,ty)).start()
             # while threading.active_count() > 1: time.sleep(1)
-    with open("all.txt", "w") as f: f.write(json.dumps(jtext))
+    if any(hold.values()):
+        with open("all.json", "w") as f: 
+            f.write(json.dumps(hold))
 
 
 if __name__ == '__main__':
