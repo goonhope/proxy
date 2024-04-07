@@ -65,7 +65,7 @@ def process(i, type):
     if info := get_(f"http://ip-api.com/json/{ip}", j=True):
         info.update(dict(port=i,type=type))
         with open("all.txt", "a+") as f:
-            f.write(i + "\n")
+            f.write(str(info) + "\n")
 
 
 def go():
