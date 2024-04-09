@@ -28,6 +28,7 @@ def google_hder(host=None, o=True):
     return google_hders
 
 
+@err
 def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     """get optional json"""
     furl = f"https://raw.githubusercontent.com/Master-Mind-007/Auto-Parse-Proxy/main/{ky}.txt" if ky else url
@@ -48,7 +49,6 @@ def err(func):
     return inner
 
 
-@err
 def process(i, ty):
     """验证过滤"""
     ip, port = i.split(":")
