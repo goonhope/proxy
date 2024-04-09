@@ -14,6 +14,16 @@ import requests, threading, os, time, platform, json
 from urllib3 import disable_warnings as dw; dw()
 
 
+def err(func):
+    """错误时返回函数名称"""
+    def inner(*args,**kwargs):
+        intime = time.strftime("%Y/%m/%d %H:%M:%S")
+        try: return func(*args,**kwargs)
+        except Exception as e:
+            return print(f"@ERROR: {intime}->{func.__name__}\nDetail: {e}!")
+    return inner
+
+
 def google_hder(host=None, o=True):
     """'google search url headers"""
     google_hders = {
@@ -37,16 +47,6 @@ def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     url_data = requests.get(furl, headers=url_headers, params=data, timeout=5, proxies=proxy, verify=False)
     if url_data.status_code == 200: goal = url_data.json() if j else set(url_data.text.strip().split()[-100:])
     return goal
-
-
-def err(func):
-    """错误时返回函数名称"""
-    def inner(*args,**kwargs):
-        intime = time.strftime("%Y/%m/%d %H:%M:%S")
-        try: return func(*args,**kwargs)
-        except Exception as e:
-            return print(f"@ERROR: {intime}->{func.__name__}\nDetail: {e}!")
-    return inner
 
 
 def process(i, ty):
