@@ -10,6 +10,7 @@
 @Reference	:	引用
 """
 from faker import Faker
+from functools import wraps
 import requests, threading, os, time, platform, json
 from urllib3 import disable_warnings as dw; dw()
 from concurrent.futures import ThreadPoolExecutor as TPool
