@@ -10,20 +10,8 @@
 @Reference	:	引用
 """
 from faker import Faker
-from functools import wraps
 import requests, threading, os, time, platform, json
 from urllib3 import disable_warnings as dw; dw()
-from concurrent.futures import ThreadPoolExecutor as TPool
-
-
-def multi(func):
-    """并发执行函数"""
-    @wraps(func)
-    def inner(*arg, **kwarg):
-        with TPool(os.cpu_count()) as ex:
-            go = ex.submit(func, *arg, **kwarg)
-        return go.result()
-    return inner
 
 
 def err(func):
