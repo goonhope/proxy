@@ -68,10 +68,12 @@ def go():
             for i in data:
                 if info :=process(i, ty):
                     hold[ty].append(info)
+                time.sleep(1.513)
             #     while threading.active_count() > 7000: time.sleep(3)
             #     threading.Thread(target=process, args=(i,ty)).start()
             # while threading.active_count() > 1: time.sleep(1)
     # if any(hold.values()):
+    
     with open("all.json", "w") as f: f.write(json.dumps(hold))
 
 
