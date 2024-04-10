@@ -12,6 +12,17 @@
 from faker import Faker
 import requests, threading, os, time, platform, json
 from urllib3 import disable_warnings as dw; dw()
+from concurrent.futures import ThreadPoolExecutor as TPool
+
+
+def multi(func):
+    """并发执行函数"""
+    @wraps(func)
+    def inner(*arg, **kwarg):
+        with TPool(os.cpu_count()) as ex:
+            go = ex.submit(func, *arg, **kwarg)
+        return go.result()
+    return inner
 
 
 def err(func):
@@ -59,6 +70,7 @@ def process(i, ty):
             info.update(dict(port=i,type=ty))
             return info
 
+@multi
 def go():
     """执行"""
     types = "https stock4 stock5".split()
