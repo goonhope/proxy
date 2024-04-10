@@ -51,14 +51,13 @@ def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
 
 def process(i, ty):
     """验证过滤"""
-    (ip, port), hold = i.split(":"), dict()
+    ip, port = i.split(":")
     # requests.get("https://icanhazip.com/", proxies={ty: f"{ty}://{i}"}, timeout=3)
-    if info := get_(f"http://ip-api.com/json/{ip}fields=status,country", j=True,proxy={ty: f"{ty}://{i}"}):
-        time.sleep(1.912)
+    if info := get_(f"http://ip-api.com/json/{ip}?fields=status,country,city,as,query", j=True,proxy={ty: f"{ty}://{i}"},):
         if info.get("status") == "success":
-            hold.update(dict(port=i,type=ty,country=info.get("country")))
-            return hold
-
+            info.pop("status")
+            info.update(dict(port=i,type=ty))
+            return info
 
 def go():
     """执行"""
