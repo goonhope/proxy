@@ -53,7 +53,7 @@ def process(i, ty):
     """验证过滤"""
     ip, port = i.split(":")
     # requests.get("https://icanhazip.com/", proxies={ty: f"{ty}://{i}"}, timeout=3)
-    if info := get_(f"http://ip-api.com/json/{ip}?fields=status,country,city,as,query", j=True,proxy={ty: f"{ty}://{i}"},):
+    if info := get_(f"http://ip-api.com/json/{ip}?fields=status,country,city,as", j=True,proxy={ty: f"{ty}://{i}"},):
         if info.get("status") == "success":
             info.pop("status")
             info.update(dict(port=i,type=ty))
