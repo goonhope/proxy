@@ -1,10 +1,10 @@
 name: check
 
 on:
-  push:
+  # push:
   workflow_dispatch:
-  schedule:
-  - cron: '0 0,4 * * *'
+  # schedule:
+  # - cron: '0 0,4 * * *'
 
 jobs:
   check:
