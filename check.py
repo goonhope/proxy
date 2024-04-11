@@ -59,7 +59,7 @@ def process(i, ty):
             info.update(dict(port=i,type=ty))
             return info
 
-@multi
+
 def go():
     """执行"""
     types = "https stock4 stock5".split()
