@@ -41,7 +41,7 @@ def google_hder(host=None, o=True):
 @err
 def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     """get optional json"""
-    furl = f"https://raw.githubusercontent.com/Master-Mind-007/Auto-Parse-Proxy/main/{ky}.txt" if ky else url
+    furl = f"https://raw.githubusercontent.com/Noctiro/getproxy/master/file/{ky}.txt" if ky else url
     url_headers, goal = google_hder(furl.split("/")[2]), None
     if hdrs and isinstance(data, dict): url_headers.update(hdrs)
     url_data = requests.get(furl, headers=url_headers, params=data, timeout=5, proxies=proxy, verify=False)
