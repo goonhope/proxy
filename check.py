@@ -62,7 +62,7 @@ def process(i, ty):
 
 def go():
     """执行"""
-    hold,types = [] "https stock4 stock5".split()
+    hold,types = [], "https stock4 stock5".split()
     for ty in types:
         if data := get_(ky=ty):
             for i in data:
