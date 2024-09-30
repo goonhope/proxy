@@ -48,10 +48,9 @@ def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     if url_data.status_code == 200: goal = url_data.json() if j else set(url_data.text.strip().split()[-100:])
     return goal
 
-
+@err
 def process(i, ty):
     """验证过滤"""
-    print(i)
     ip, port = i.split(":")
     # requests.get("https://icanhazip.com/", proxies={ty: f"{ty}://{i}"}, timeout=3)
     if info := get_(f"http://ip-api.com/json/{ip}?fields=status,country,city,as", j=True,proxy={ty: f"{ty}://{i}"},):
