@@ -62,13 +62,12 @@ def process(i, ty):
 
 def go():
     """执行"""
-    types = "https stock4 stock5".split()
-    hold = dict.fromkeys(types,[])
+    hold,types = [] "https stock4 stock5".split()
     for ty in types:
         if data := get_(ky=ty):
             for i in data:
-                if info :=process(i, ty):
-                    hold[ty].append(info)
+                if info := process(i, ty):
+                    hold.append(info)
                 time.sleep(1.513)
             #     while threading.active_count() > 7000: time.sleep(3)
             #     threading.Thread(target=process, args=(i,ty)).start()
