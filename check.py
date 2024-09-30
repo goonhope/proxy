@@ -48,7 +48,7 @@ def get_(url="", hdrs=None, data=None, proxy=None, j=False,ky=""):
     if url_data.status_code == 200: goal = url_data.json() if j else set(url_data.text.strip().split()[-100:])
     return goal
 
-
+@err
 def process(i, ty):
     """验证过滤"""
     ip, port = i.split(":")
